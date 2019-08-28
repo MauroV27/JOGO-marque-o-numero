@@ -1,0 +1,70 @@
+body{
+    background: rgba(102, 97, 97, 0.61); 
+}
+
+table{
+    border-collapse: collapse;
+    border: 1px solid #000;
+    position: relative;
+    margin:auto;
+}
+td{
+    text-align: center;
+    vertical-align: center;
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgb(29, 23, 23);
+}
+
+button{
+    font-size: 30px;
+    border: none;
+    background: rgb(231, 222, 222);
+    display: inline;
+    text-decoration: none;
+}
+.gameOver{
+    color: #888;
+}
+
+#interface{
+    margin: auto;
+    background: rgb(231, 222, 222);
+    border: 1px solid #000;
+    width: 500px;
+    vertical-align: center;
+}
+
+#jogo{
+    margin: auto;
+    width: 420px;
+    margin-top: 10px;
+    margin-bottom: 15px;      
+}
+
+.infos{
+    text-align: center;
+    font:  bolder 15pt Arial;
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+#fase, #timer, #menu{
+    display: inline-block;
+    width: 33.3%;
+    height: 20pt;
+}
+
+.maisTempo{
+    transition: 1s;
+    color: #0f0;
+}
+
+#newGame{
+    text-align: center;
+    padding: 8px;
+    font: normal 16pt Arial;
+}
+
+
