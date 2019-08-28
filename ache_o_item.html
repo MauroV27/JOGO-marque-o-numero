@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styleJogo.css">
+    <title>Jogo de encontrar o item</title>
+</head>
+<body>
+    <h1 style="text-align: center; color: aliceblue">Marque</h1>
+    <div id="interface">
+        <p></p>
+        <div class="infos" id="menu"><a href="main.html">menu</a></div><!--
+     --><div class="infos" id="fase"></div><!--
+     --><div class="infos" id="timer"></div>
+        <div id="jogo"></div>    
+    </div>
+
+    <script>
+        const tela = document.getElementById('jogo')
+        const fase = document.getElementById('fase')
+        const timerShow = document.getElementById('timer')
+        
+        const grade = []
+        const grade_largura = 8;
+        const grade_altura = 8;
+        const grade_total = grade_largura * grade_largura
+        
+        var nivel = 1
+        var quantidade_respostas = 1
+        var tempo_restante = 30
+        
+        var timeOut = window.setInterval("temporizador()", 1000)
+     
+        rodarFase();
+
+        function rodarFase(){
+            fase.innerHTML = "nivel: "+nivel
+            matriz();   
+        }
+
+        function temporizador(){
+            if ( tempo_restante > 0){
+                tempo_restante -= 1
+            } else {
+                gameOver();
+            }
+            if(tempo_restante <= 0){
+                tempo_restante = 0;
+            }
+            timerShow.innerHTML = "tempo "+ tempo_restante
+        }
+
+        function matriz(){
+
+            32 - nivel >= 0 ? ( quantidade_respostas = Number(32 - nivel) ) : ( quantidade_respostas == 1 ) ;
+
+            for ( let i = 0; i < grade_total; ++i){
+                grade[i] = Math.floor(Math.random() * (nivel ))
+            }
+            
+            let k = 0
+
+            do{
+                grade[Math.floor(Math.random() * grade_total)] = nivel
+                k++
+            }while( k < quantidade_respostas)
+            
+
+            gerarGrade()
+        }
+
+        function gerarGrade(){
+            let html = '<table cellpading=0 cellspacing=0 id="tabela">'
+            for ( let row = 0 ; row < grade_altura; ++row){
+                html += '<tr>'
+                for( let col = 0 ; col < grade_largura; ++col){
+                    let position = col + (grade_largura * row)
+                    html += '<td>' 
+                    html += `<button id="tecla${position}" onclick="clickpass(${grade[position]})">${grade[position]}</button>`
+                    html += '</td>'   
+            }
+            html += '</tr>'
+        }
+            tela.innerHTML = html
+        }
+
+        function clickpass(e){
+            if ( e == nivel ){
+                tempo_restante += 3;
+                proximaFase();
+            } else {
+                tempo_restante -= 2;
+            }
+        }
+
+        function proximaFase(){
+            if ( nivel < 100){
+                nivel += 1;
+                rodarFase()
+            } else {
+                window.clearInterval(timeOut)
+                finalizarTabela('#248334', 1)
+                document.body.style.background = '#248334'
+            }
+        }
+
+        function gameOver(){
+            timerShow.style.color = '#888'
+            finalizarTabela('#888', 0)
+            document.body.style.background = '#888'   //'#ff6347' tomato
+        }
+
+        function finalizarTabela(valor, result){
+            window.clearInterval(timeOut)
+            for ( let i = 0; i < grade_total; ++i ){
+                document.getElementById('tecla'+i).disabled = true;
+                document.getElementById('tecla'+i).style.color = valor
+            }
+            if ( result == 0){
+                marcarEmVerde()
+            }
+            let posGame = '<div id="newGame">'
+            posGame += result == 1 ? ("Vitoria"):("Derrota")
+            posGame += `<br><a href="ache_o_item.html" >Novo jogo</a></div>`
+            document.getElementById('interface').innerHTML += posGame
+        }
+
+        function marcarEmVerde(){
+            for ( let i = 0 ; i < grade_total; ++i){
+                if ( grade[i] == nivel){
+                    document.getElementById('tecla'+i).style.color = '#0a0'
+                }
+            }
+        }
+    </script>
+</body>
+</html>
