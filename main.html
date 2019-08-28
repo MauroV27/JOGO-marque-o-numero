@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Menu</title>
+    <style>
+        body{
+            background: rgba(115, 54, 151, 0.685);
+            color: aliceblue;      
+        }
+        a{
+            text-decoration: none;
+            color: aliceblue;
+        }
+        a:hover{
+            color: #E8BDFF;
+            transition: 0.5s; 
+        }
+        #menu{
+            background: rgba(38, 14, 66, 0.295);
+            border: 1px solid #000;
+            width: 600px;
+            height: 400px;
+            margin: auto;
+            border-radius: 40px;
+            box-shadow: 1px 1px rgba(0, 0, 0, 0.247);
+            margin-top: 50px;
+        }
+        .botao{
+            text-align: center;
+            font: bold 20pt Arial;
+            padding-top: 25px;
+            border: 1px solid #222;
+            width: 200px;
+            height: 50px;
+            margin: auto;
+            margin-top: 10px;
+            background: rgba(64, 18, 95, 0.616);
+        }
+        h1{
+            text-align: center;
+            color: aliceblue;
+        }
+        p{
+            text-align: center;
+            font-size: 15pt;
+        }
+        .ferramentaDeOdio{
+            display: block;
+            margin: auto;
+        }
+        .voltarMenu{
+            display: block;
+            text-align: center;
+            font: normal 14pt Arial;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <h1 >Marque o número</h1>
+        <a href="ache_o_item.html"><div id="jogar" class="botao">Jogar</div></a>
+        <a href="#"><div id="regras" class="botao">regras</div></a>
+        <a href="#"><div id="creditos" class="botao">créditos</div></a>
+    </div>
+
+    <script>
+        const menu = document.getElementById('menu')
+        const botao = document.getElementsByClassName('botao')
+        const letsGo = document.getElementById('jogar')
+        const regras = document.getElementById('regras')
+        const creditos = document.getElementById('creditos')
+
+        creditos.addEventListener('click', showMe)
+        regras.addEventListener('click', showregras)
+        
+        function showregras(){
+            menu.innerHTML = '<h1>REGRAS</h1>'
+            menu.innerHTML += '<p>Ache o número do nível e marque para passar de fase.</p>'
+            menu.innerHTML += '<p>Se o tempo chegar a zero é gameover.</p>'
+            menu.innerHTML += '<p>Chegue ao nível 100 e ganhe.</p>'
+            menu.innerHTML += '<p>Passar de fase aumenta em 3 segundos o tempo.<br>Errar diminui em 2 segundos.</p>'
+            menu.innerHTML += '<p>Bom jogo!</p>'
+            menu.innerHTML += '<a href="main.html" class="voltarMenu">Voltar para o menu</a>'
+            
+        }
+        
+        function showMe(){
+            menu.innerHTML = '<h1>CRÉDITOS</h1>'
+            menu.innerHTML += '<p>"Jogo" desenvolvido por Mauro Victor.</p>'
+            menu.innerHTML += '<a href="main.html" class="voltarMenu">Voltar para o menu</a>'
+        }
+    </script>
+</body>
+</html>
